@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100d18">
+<title>هل تثق بالإجابة؟ | DO YOU TRUST THE ANSWER?</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --bg: #100d18;
+  --panel: #191421;
+  --panel2: #21192b;
+  --pink: #f3a8ca;
+  --rose: #d987b6;
+  --mauve: #bd91cf;
+  --purple: #9876bd;
+  --lavender: #d7c1ee;
+  --white: #f8f1fa;
+  --muted: #a99caf;
+  --line: rgba(215,193,238,.15);
+  --success: #9bd7bd;
+  --warning: #edc58e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at 85% 5%, rgba(189,145,207,.12), transparent 28%),
+    radial-gradient(circle at 10% 45%, rgba(243,168,202,.07), transparent 25%),
+    var(--bg);
+  color: var(--white);
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--pink);
+  color: var(--bg);
+}
+
+.container {
+  width: min(1100px, 90%);
+  margin: auto;
+}
+
+.mono {
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(16,13,24,.88);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar-inner {
+  width: min(1100px, 90%);
+  margin: auto;
+  min-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--rose);
+  color: var(--pink);
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+}
+
+.nav {
+  display: flex;
+  gap: 17px;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+  transition: .2s;
+}
+
+.nav a:hover {
+  color: var(--pink);
+}
+
+.hero {
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 90px 0;
+  overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(243,168,202,.13);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 430px;
+  height: 430px;
+  left: -190px;
+  top: 10%;
+}
+
+.hero::after {
+  width: 300px;
+  height: 300px;
+  left: -125px;
+  top: 19%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.eyebrow {
+  color: var(--rose);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 8vw, 86px);
+  line-height: 1.25;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.hero h1 span {
+  color: var(--pink);
+  display: block;
+}
+
+.hero-en {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(13px, 2vw, 19px);
+  color: var(--mauve);
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.hero-desc {
+  color: var(--muted);
+  max-width: 600px;
+  font-size: 17px;
+  margin-bottom: 35px;
+}
+
+.primary-btn,
+.secondary-btn {
+  border: 1px solid var(--rose);
+  padding: 13px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.primary-btn {
+  background: linear-gradient(120deg, var(--pink), var(--mauve));
+  color: #211426;
+  font-weight: 700;
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(217,135,182,.2);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: var(--pink);
+}
+
+.secondary-btn:hover {
+  background: rgba(243,168,202,.1);
+}
+
+.hero-meta {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 55px;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+}
+
+section {
+  padding: 95px 0;
+  scroll-margin-top: 75px;
+}
+
+.section-head {
+  margin-bottom: 38px;
+}
+
+.section-number {
+  color: var(--rose);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.section-head h2 {
+  font-size: clamp(28px, 5vw, 43px);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.section-head p {
+  color: var(--muted);
+  max-width: 650px;
+}
+
+.panel {
+  background: linear-gradient(145deg, rgba(33,25,43,.92), rgba(25,20,33,.95));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 30px;
+}
+
+.statement {
+  font-size: clamp(21px, 3vw, 30px);
+  line-height: 1.8;
+  color: var(--lavender);
+  font-weight: 500;
+}
+
+.statement span {
+  color: var(--pink);
+}
+
+.small-note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+
+.info-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 25px;
+  border-radius: 15px;
+  transition: .25s;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(243,168,202,.5);
+}
+
+.card-icon {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(189,145,207,.13);
+  color: var(--pink);
+  font-size: 21px;
+  margin-bottom: 18px;
+}
+
+.info-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.info-card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.tag {
+  display: inline-block;
+  color: var(--pink);
+  border: 1px solid rgba(243,168,202,.25);
+  border-radius: 30px;
+  padding: 3px 11px;
+  font-size: 10px;
+  margin-top: 18px;
+}
+
+.quote-panel {
+  position: relative;
+  overflow: hidden;
+  border-right: 3px solid var(--rose);
+}
+
+.quote-panel p {
+  font-size: clamp(20px, 3vw, 29px);
+  color: var(--lavender);
+  line-height: 1.9;
+}
+
+.quote-panel strong {
+  color: var(--pink);
+}
+
+.quote-panel small {
+  display: block;
+  color: var(--muted);
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.fact-number {
+  font-family: 'Space Mono', monospace;
+  color: var(--pink);
+  font-size: clamp(35px, 7vw, 65px);
+  margin: 15px 0;
+}
+
+.fact-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.investigation {
+  border-top: 1px solid var(--line);
+}
+
+.case {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 27px;
+  margin-bottom: 24px;
+}
+
+.case-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.case-id {
+  color: var(--rose);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+}
+
+.case-type {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.case h3 {
+  font-size: 21px;
+  margin-bottom: 13px;
+}
+
+.case-question {
+  color: var(--lavender);
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.code-sample {
+  direction: ltr;
+  text-align: left;
+  background: #0c0a12;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 17px;
+  color: #edc5e2;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  overflow-x: auto;
+  margin: 18px 0;
+  white-space: pre;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  width: 100%;
+  text-align: right;
+  background: rgba(255,255,255,.025);
+  color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 17px;
+  cursor: pointer;
+  transition: .2s;
+  font-size: 14px;
+}
+
+.option:hover {
+  border-color: var(--mauve);
+  background: rgba(189,145,207,.08);
+}
+
+.option.selected {
+  border-color: var(--pink);
+  background: rgba(243,168,202,.1);
+  color: var(--pink);
+}
+
+.case-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.reveal {
+  display: none;
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+
+.reveal.show {
+  display: block;
+  animation: fade .45s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-label {
+  color: var(--success);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.result-text {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.model-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.model {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.025);
+  border-radius: 11px;
+  padding: 15px;
+}
+
+.model strong {
+  color: var(--pink);
+  font-size: 13px;
+}
+
+.model p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.source-note {
+  border-right: 2px solid var(--mauve);
+  padding: 10px 15px;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 17px;
+}
+
+.score-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: linear-gradient(110deg, rgba(189,145,207,.16), rgba(243,168,202,.08));
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 20px 25px;
+  margin-bottom: 28px;
+}
+
+.score-panel strong {
+  color: var(--pink);
+  font-family: 'Space Mono', monospace;
+  font-size: 25px;
+}
+
+.score-panel span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.progress {
+  height: 5px;
+  background: rgba(255,255,255,.08);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--rose), var(--lavender));
+  transition: .3s;
+}
+
+.tool-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.tool {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 9px 14px;
+  color: var(--lavender);
+  font-size: 12px;
+  background: rgba(255,255,255,.025);
+}
+
+.process {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.process-item {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--panel);
+}
+
+.process-item b {
+  display: block;
+  color: var(--pink);
+  margin-bottom: 7px;
+}
+
+.process-item p {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sources {
+  display: grid;
+  gap: 12px;
+}
+
+.source-item {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.source-item strong {
+  color: var(--pink);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.source-item p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.final-message {
+  text-align: center;
+  padding: 75px 25px;
+  background:
+    radial-gradient(circle at center, rgba(189,145,207,.15), transparent 65%),
+    var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.final-message h2 {
+  font-size: clamp(27px, 5vw, 45px);
+  margin-bottom: 18px;
+}
+
+.final-message h2 span {
+  color: var(--pink);
+}
+
+.final-message p {
+  color: var(--muted);
+  max-width: 650px;
+  margin: auto;
+}
+
+.footer {
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+@media(max-width:750px) {
+  .nav {
+    display: none;
+  }
+
+  .grid,
+  .model-list,
+  .process {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: 78vh;
+  }
+
+  section {
+    padding: 70px 0;
+  }
+
+  .panel,
+  .case {
+    padding: 20px;
+  }
+
+  .score-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">AI</div>
+      <span>THE ANSWER FILE</span>
+    </div>
+
+    <nav class="nav">
+      <a href="#vision">رؤيتي</a>
+      <a href="#around">حولنا</a>
+      <a href="#curiosity">ما أثار فضولي</a>
+      <a href="#investigation">التحقيق</a>
+      <a href="#sources">المصادر</a>
+    </nav>
+
+    <span class="mono" style="font-size:10px;color:var(--rose)">FILE 001</span>
+  </div>
+</header>
+
+<main>
+
+<!-- INTRO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+      <div class="eyebrow">AI THROUGH MY EYES / DIGITAL EXPERIENCE</div>
+
+      <h1>
+        هل تثق
+        <span>بالإجابة؟</span>
+      </h1>
+
+      <div class="hero-en">DO YOU TRUST THE ANSWER?</div>
+
+      <p class="hero-desc">
+        ثلاث أدوات ذكاء اصطناعي، وأسئلة مختلفة، وإجابات قد تبدو مقنعة.
+        لكن هل التشابه يعني أن الإجابة صحيحة؟
+        ابدأ التجربة واكتشف بنفسك.
+      </p>
+
+      <button class="primary-btn" onclick="goTo('vision')">
+        ابدأ التجربة ←
+      </button>
+
+      <div class="hero-meta">
+        <span>INVESTIGATION 001</span>
+        <span>3 CASES</span>
+        <span>HUMAN THINKING × AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI IN MY WORDS -->
+<section id="vision">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-number">01 / AI IN MY WORDS</div>
+      <h2>الذكاء الاصطناعي كما أراه</h2>
+      <p>مو مجرد إجابات جاهزة، بل أداة تعتمد فائدتها على طريقة استخدامنا لها.</p>
+    </div>
+
+    <div class="panel">
+      <p class="statement">
+        أشوف الذكاء الاصطناعي <span>أداة ذكية تساعدنا</span>
+        في الوصول للمعلومات، والتعلّم، وإنجاز المهام،
+        لكنه ما يغني عن التفكير البشري.
+        مهما كانت إجاباته مقنعة، تظل مسؤوليتنا نفهمها ونتحقق منها.
+      </p>
+
+      <p class="small-note">
+        بالنسبة لي، قيمة الذكاء الاصطناعي مو في إنه يعطيني إجابة فقط،
+        بل في كيف أستخدمها وأراجعها وأبني عليها.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- AI AROUND US -->
+<section id="around">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-number">02 / AI AROUND US</div>
+      <h2>الذكاء الاصطناعي حولنا</h2>
+      <p>ثلاثة مجالات نشوف فيها تطبيقات الذكاء الاصطناعي في الواقع.</p>
+    </div>
+
+    <div class="grid">
+
+      <article class="info-card">
+        <div class="card-icon">✦</div>
+        <h3>التعليم</h3>
+        <p>
+          يمكن استخدام أدوات الذكاء الاصطناعي لشرح المفاهيم،
+          وتقديم أمثلة إضافية، والمساعدة في إعداد تدريبات تناسب
+          احتياجات المتعلم. لكن فهم المعلومة والتحقق منها يظل مهمًا.
+        </p>
+        <span class="tag">LEARNING</span>
+      </article>
+
+      <article class="info-card">
+        <div class="card-icon">⌁</div>
+        <h3>الطب</h3>
+        <p>
+          يمكن توظيف أنظمة الذكاء الاصطناعي في تحليل بعض البيانات
+          والصور الطبية، والمساعدة في البحث ودعم القرارات الصحية،
+          مع بقاء مسؤولية التقييم الطبي لدى المختصين.
+        </p>
+        <span class="tag">HEALTHCARE</span>
+      </article>
+
+      <article class="info-card">
+        <div class="card-icon">◌</div>
+        <h3>الفضاء</h3>
+        <p>
+          تستخدم تطبيقات الذكاء الاصطناعي في تحليل صور الأقمار
+          الصناعية، واكتشاف الأنماط في البيانات، ودعم بعض أنظمة
+          الملاحة والعمل الذاتي للمركبات الفضائية.
+        </p>
+        <span class="tag">SPACE EXPLORATION</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT SURPRISED ME -->
+<section id="curiosity">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-number">03 / WHAT SURPRISED ME</div>
+      <h2>ما الذي أثار فضولي؟</h2>
+      <p>معلومة جعلتني أعيد التفكير في فكرة مقارنة إجابات النماذج.</p>
+    </div>
+
+    <div class="panel quote-panel">
+      <div class="fact-label mono">RESEARCH / ICML 2025</div>
+
+      <div class="fact-number">60%</div>
+
+      <p>
+        في إحدى مجموعات البيانات التي تناولها بحث عن أخطاء نماذج اللغة،
+        اتفقت النماذج في <strong>60% من الحالات التي أخطأ فيها كلا النموذجين</strong>.
+      </p>
+
+      <small>
+        هذه نتيجة ضمن مجموعة بيانات محددة في البحث، وليست نسبة تنطبق
+        على جميع النماذج أو جميع الأسئلة.
+      </small>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <p class="statement" style="font-size:21px">
+        هذا اللي لفت انتباهي:
+        <span>ممكن أكثر من نموذج يخطئ بطريقة متشابهة.</span>
+        لذلك اتفاقهم وحده ما يكفي لإثبات صحة المعلومة.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTIGATION -->
+<section class="investigation" id="investigation">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-number">04 / THE INVESTIGATION</div>
+      <h2>ملفات التحقيق</h2>
+      <p>
+        في تجربتي قارنت إجابات ChatGPT وGemini وMicrosoft Copilot
+        على ثلاثة أسئلة. اقرأ السؤال، واختر الإجابة التي تراها أدق،
+        ثم اكشف التحليل.
+      </p>
+    </div>
+
+    <div class="score-panel">
+      <div>
+        <span>نتيجتك في التحقيق</span>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+
+      <div>
+        <strong id="score">0 / 3</strong>
+        <div><span id="completed">0 من 3 ملفات مكتملة</span></div>
+      </div>
+    </div>
+
+    <!-- CASE 1 -->
+    <article class="case" id="case1">
+      <div class="case-top">
+        <span class="case-id">CASE 001 / JAVASCRIPT</span>
+        <span class="case-type">منطق البرمجة</span>
+      </div>
+
+      <h3>الكود يعمل، لكن هل يحسب المطلوب؟</h3>
+
+      <p class="case-question">
+        لدينا الكود التالي. ما الناتج الذي سيظهر؟ وهل يحسب المتوسط الحسابي بشكل صحيح؟
+      </p>
+
+      <pre class="code-sample">let a = 10;
+let b = 20;
+
+let average = a + b / 2;
+
+console.log(average);</pre>
+
+      <div class="options" id="options1">
+        <button class="option" onclick="pick('q1','A',this)">
+          A — سيظهر 15؛ لأن الكود يحسب متوسط العددين.
+        </button>
+
+        <button class="option" onclick="pick('q1','B',this)">
+          B — سيظهر 20؛ لأن القسمة تُنفّذ قبل الجمع، لكن المتوسط غير محسوب بالشكل الصحيح.
+        </button>
+
+        <button class="option" onclick="pick('q1','C',this)">
+          C — سيظهر خطأ برمجي ولن يتم تنفيذ الكود.
+        </button>
+      </div>
+
+      <div class="case-actions">
+        <button class="primary-btn" onclick="reveal('q1')">اكشف التحليل</button>
+      </div>
+
+      <div class="reveal" id="result1">
+        <div class="result-label">✓ الإجابة الأدق: B</div>
+
+        <p class="result-text">
+          سيظهر الناتج 20، ولن يظهر خطأ في التنفيذ.
+          السبب أن القسمة لها أولوية أعلى من الجمع، لذلك يفسر JavaScript
+          التعبير بهذا الشكل:
+        </p>
+
+        <pre class="code-sample">10 + (20 / 2)
+10 + 10 = 20</pre>
+
+        <p class="result-text">
+          لكن إذا كان الهدف حساب المتوسط، فالصحيح وضع العددين
+          داخل أقواس حتى يتم جمعهما أولًا:
+        </p>
+
+        <pre class="code-sample">let average = (a + b) / 2;
+// الناتج الصحيح: 15</pre>
+
+        <div class="source-note">
+          التحقق: MDN Web Docs — JavaScript Operator Precedence.
+          يوضح المرجع أولوية العمليات وكيف تتحكم الأقواس في ترتيب تنفيذ التعبيرات.
+        </div>
+
+        <div class="model-list">
+          <div class="model">
+            <strong>ChatGPT</strong>
+            <p>
+              استخدم مثال الخصم لتوضيح وجود خطأ منطقي في طريقة كتابة العملية.
+            </p>
+          </div>
+
+          <div class="model">
+            <strong>Gemini</strong>
+            <p>
+              استخدم مثالًا صحيحًا للمتوسط الحسابي، لكنه لم يعرض الكود الخاطئ بوضوح.
+            </p>
+          </div>
+
+          <div class="model">
+            <strong>Microsoft Copilot</strong>
+            <p>
+              وضّح أن الكود يعطي 20 بسبب أولوية القسمة، وذكر التصحيح باستخدام الأقواس.
+            </p>
+          </div>
+        </div>
+
+        <p class="small-note">
+          البطاقات تلخص المقارنة التي أجريتها، وليست اقتباسات حرفية من النماذج.
+        </p>
+      </div>
+    </article>
+
+    <!-- CASE 2 -->
+    <article class="case" id="case2">
+      <div class="case-top">
+        <span class="case-id">CASE 002 / DATABASE</span>
+        <span class="case-type">قواعد البيانات</span>
+      </div>
+
+      <h3>هل الحذف ينتقل تلقائيًا؟</h3>
+
+      <p class="case-question">
+        إذا حذفنا سجلًا من جدول رئيسي في قاعدة البيانات،
+        فهل تُحذف السجلات المرتبطة به في الجداول الأخرى تلقائيًا؟
+      </p>
+
+      <div class="options" id="options2">
+        <button class="option" onclick="pick('q2','A',this)">
+          A — نعم، كل سجل مرتبط يُحذف تلقائيًا بمجرد حذف السجل الرئيسي.
+        </button>
+
+        <button class="option" onclick="pick('q2','B',this)">
+          B — يعتمد على إعداد المفتاح الأجنبي؛ فمثلًا CASCADE يحذف السجلات المرتبطة.
+        </button>
+
+        <button class="option" onclick="pick('q2','C',this)">
+          C — لا يمكن حذف السجل الرئيسي في أي حالة إذا كانت هناك سجلات مرتبطة.
+        </button>
+      </div>
+
+      <div class="case-actions">
+        <button class="primary-btn" onclick="reveal('q2')">اكشف التحليل</button>
+      </div>
+
+      <div class="reveal" id="result2">
+        <div class="result-label">✓ الإجابة الأدق: B</div>
+
+        <p class="result-text">
+          الحذف لا يحدث تلقائيًا في كل الحالات؛ بل يعتمد على
+          الإجراء المحدد عند إنشاء علاقة المفتاح الأجنبي.
+        </p>
+
+        <div class="model-list">
+          <div class="model">
+            <strong>ChatGPT</strong>
+            <p>
+              أوضح أن الحذف يعتمد على إعداد العلاقة، وليس تلقائيًا في جميع الحالات.
+            </p>
+          </div>
+
+          <div class="model">
+            <strong>Gemini</strong>
+            <p>
+              وضّح أن CASCADE يحذف السجلات التابعة عند حذف السجل المشار إليه.
+            </p>
+          </div>
+
+          <div class="model">
+            <strong>Microsoft Copilot</strong>
+            <p>
+              أشار إلى أن سلوك الحذف يتحدد بإعدادات المفتاح الأجنبي.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:18px;padding:18px">
+          <p style="color:var(--pink);font-weight:700">أهم خيارات الحذف:</p>
+          <p class="result-text">
+            <b style="color:var(--lavender)">CASCADE:</b>
+            يحذف السجلات المرتبطة تلقائيًا.
+          </p>
+          <p class="result-text">
+            <b style="color:var(--lavender)">RESTRICT:</b>
+            يمنع حذف السجل المشار إليه إذا كانت هناك سجلات مرتبطة.
+          </p>
+          <p class="result-text">
+            <b style="color:var(--lavender)">NO ACTION:</b>
+            هو الإعداد الافتراضي، ويؤدي عادةً إلى رفض الحذف إذا بقيت
+            سجلات مرتبطة تخالف قيد المفتاح الأجنبي عند التحقق.
+          </p>
+          <p class="result-text">
+            <b style="color:var(--lavender)">SET NULL:</b>
+            يضع قيمة المفتاح الأجنبي في السجلات المرتبطة على NULL،
+            إذا كانت القيود تسمح بذلك.
+          </p>
+        </div>
+
+        <div class="source-note">
+          التحقق: PostgreSQL Documentation 18 — Constraints.
+          يشرح المرجع خيارات ON DELETE وسلوك المفتاح الأجنبي.
+        </div>
+
+        <p class="small-note">
+          البطاقات تلخص المقارنة التي أجريتها، وليست اقتباسات حرفية من النماذج.
+        </p>
+      </div>
+    </article>
+
+    <!-- CASE 3 -->
+    <article class="case" id="case3">
+      <div class="case-top">
+        <span class="case-id">CASE 003 / AI RELIABILITY</span>
+        <span class="case-type">موثوقية الإجابات</span>
+      </div>
+
+      <h3>ثلاثة نماذج، إجابة متشابهة… هل انتهى التحقق؟</h3>
+
+      <p class="case-question">
+        إذا أعطتني ثلاثة نماذج ذكاء اصطناعي الإجابة نفسها،
+        فهل هذا دليل كافٍ على صحتها؟ ولماذا؟
+      </p>
+
+      <div class="options" id="options3">
+        <button class="option" onclick="pick('q3','A',this)">
+          A — نعم، اتفاق ثلاثة نماذج يعني أن الإجابة صحيحة.
+        </button>
+
+        <button class="option" onclick="pick('q3','B',this)">
+          B — الاتفاق مؤشر قد يكون مفيدًا، لكنه لا يغني عن التحقق من مصدر موثوق.
+        </button>
+
+        <button class="option" onclick="pick('q3','C',this)">
+          C — نعم، لأن كل نموذج يعمل بطريقة مختلفة تمامًا ولا يمكن أن تتشابه أخطاؤها.
+        </button>
+      </div>
+
+      <div class="case-actions">
+        <button class="primary-btn" onclick="reveal('q3')">اكشف التحليل</button>
+      </div>
+
+      <div class="reveal" id="result3">
+        <div class="result-label">✓ الإجابة الأدق: B</div>
+
+        <p class="result-text">
+          تشابه الإجابات لا يثبت صحتها؛ فقد تتشابه النماذج في بعض
+          مصادر البيانات أو الأنماط التي تعلمتها، وبالتالي قد تقع
+          في أخطاء متشابهة.
+        </p>
+
+        <div class="model-list">
+          <div class="model">
+            <strong>ChatGPT</strong>
+            <p>
+              ركّز على أن اتفاق النماذج لا يكفي وحده لإثبات صحة المعلومة.
+            </p>
+          </div>
+
+          <div class="model">
+            <strong>Gemini</strong>
+            <p>
+              أشار إلى أهمية التحقق وعدم اعتبار التشابه دليلًا نهائيًا.
+            </p>
+          </div>
+
+          <div class="model">
+            <strong>Microsoft Copilot</strong>
+            <p>
+              وضّح أن الإجابات المتشابهة تحتاج إلى مراجعة مصادر مستقلة وموثوقة.
+            </p>
+          </div>
+        </div>
+
+        <div class="source-note">
+          التحقق: بحث Correlated Errors in Large Language Models،
+          المنشور ضمن Proceedings of the 42nd International Conference
+          on Machine Learning، عام 2025.
+        </div>
+
+        <p class="small-note">
+          البطاقات تلخص المقارنة التي أجريتها، وليست اقتباسات حرفية من النماذج.
+        </p>
+      </div>
+    </article>
+
+    <div class="panel" style="text-align:center">
+      <h3 style="color:var(--pink);margin-bottom:10px">انتهى التحقيق؟</h3>
+      <p class="result-text">
+        النتيجة ليست مجرد اختيار إجابة صحيحة؛ الأهم هو معرفة
+        لماذا كانت صحيحة، وكيف تحققنا منها.
+      </p>
+      <button class="secondary-btn" style="margin-top:18px" onclick="resetQuiz()">
+        أعد التجربة
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW AI HELPED -->
+<section id="helped">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-number">05 / HOW AI HELPED ME</div>
+      <h2>كيف ساعدني الذكاء الاصطناعي؟</h2>
+      <p>الأداة ساعدتني في تنفيذ الفكرة، لكن توجيه التجربة ومراجعتها كان جزءًا أساسيًا من عملي.</p>
+    </div>
+
+    <div class="panel">
+      <h3 style="color:var(--pink);margin-bottom:12px">الأدوات التي استخدمتها</h3>
+
+      <div class="tool-list">
+        <span class="tool">ChatGPT</span>
+        <span class="tool">Gemini</span>
+        <span class="tool">Microsoft Copilot</span>
+      </div>
+
+      <div class="process" style="margin-top:25px">
+        <div class="process-item">
+          <b>01 — البحث والمقارنة</b>
+          <p>
+            استخدمت النماذج لطرح الأسئلة نفسها ومقارنة الإجابات
+            وملاحظة أوجه الاتفاق والاختلاف.
+          </p>
+        </div>
+
+        <div class="process-item">
+          <b>02 — التصميم والتطوير</b>
+          <p>
+            استعنت بالذكاء الاصطناعي في تنظيم الفكرة،
+            وصياغة بعض النصوص، والمساعدة في كتابة الكود.
+          </p>
+        </div>
+
+        <div class="process-item">
+          <b>03 — دوري الشخصي</b>
+          <p>
+            اخترت فكرة المشروع والأسئلة، وراجعت المعلومات،
+            وحددت شكل التجربة وطريقة عرض النتائج والمصادر.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-number">06 / REFERENCES</div>
+      <h2>المصادر والمراجع</h2>
+      <p>
+        هذه المراجع الأساسية التي استعنت بها للتحقق من المعلومات
+        ودعم محتوى التجربة. عُرضت أسماؤها وعناوينها دون روابط مباشرة.
+      </p>
+    </div>
+
+    <div class="sources">
+
+      <div class="source-item">
+        <strong>01 — MDN Web Docs</strong>
+        <p>
+          JavaScript — Operator Precedence.
+          مرجع توثيق أولوية العمليات الحسابية في JavaScript.
+        </p>
+      </div>
+
+      <div class="source-item">
+        <strong>02 — PostgreSQL Documentation 18</strong>
+        <p>
+          Chapter 5.5 — Constraints.
+          مرجع قيود قواعد البيانات والمفاتيح الأجنبية وخيارات ON DELETE.
+        </p>
+      </div>
+
+      <div class="source-item">
+        <strong>03 — Proceedings of Machine Learning Research (PMLR)</strong>
+        <p>
+          Correlated Errors in Large Language Models — 2025.
+          بحث علمي عن ترابط الأخطاء بين نماذج اللغة الكبيرة.
+          المؤلفون: Elliot Myunghoon Kim, Avi Garg, Kenny Peng, Nikhil Garg.
+        </p>
+      </div>
+
+      <div class="source-item">
+        <strong>04 — UNESCO</strong>
+        <p>
+          Artificial Intelligence in Education.
+          مرجع حول استخدام الذكاء الاصطناعي في التعليم والنهج المتمحور حول الإنسان.
+        </p>
+      </div>
+
+      <div class="source-item">
+        <strong>05 — World Health Organization (WHO)</strong>
+        <p>
+          Ethics and Governance of Artificial Intelligence for Health — 2021.
+          مرجع حول تطبيقات الذكاء الاصطناعي في الصحة وأخلاقيات استخدامها.
+        </p>
+      </div>
+
+      <div class="source-item">
+        <strong>06 — NASA</strong>
+        <p>
+          Artificial Intelligence.
+          مرجع رسمي عن تطبيقات الذكاء الاصطناعي في المهمات الفضائية
+          وتحليل صور الأقمار الصناعية والمركبات ذاتية الحركة.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section id="final">
+  <div class="container">
+    <div class="final-message">
+      <div class="eyebrow">THE REALITY CHECK</div>
+
+      <h2>
+        التشابه ليس إثباتًا.
+        <span>والثقة ليست دليلًا.</span>
+      </h2>
+
+      <p>
+        الذكاء الاصطناعي أداة ممكن تساعدنا وتختصر علينا الكثير،
+        لكن التفكير والتحقق مسؤوليتنا.
+        لا تجعل إقناع الإجابة يغنيك عن التأكد من صحتها.
+      </p>
+
+      <p style="color:var(--pink);margin-top:25px;font-weight:600">
+        لا تكتفِ بالإجابة… تحقق منها.
+      </p>
+
+      <button class="primary-btn" style="margin-top:30px" onclick="goTo('home')">
+        العودة للبداية ↑
+      </button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    AI THROUGH MY EYES · DO YOU TRUST THE ANSWER?
+    <br>
+    تجربة رقمية تفاعلية
+  </div>
+</footer>
+
+<script>
+const quizState = {
+  q1: { selected: null, revealed: false, correct: "B" },
+  q2: { selected: null, revealed: false, correct: "B" },
+  q3: { selected: null, revealed: false, correct: "B" }
+};
+
+let score = 0;
+let completed = 0;
+
+function goTo(id) {
+  const target = document.getElementById(id);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+function pick(question, answer, button) {
+  const state = quizState[question];
+
+  if (!state || state.revealed) return;
+
+  state.selected = answer;
+
+  const parent = button.parentElement;
+  parent.querySelectorAll(".option").forEach(option => {
+    option.classList.remove("selected");
+  });
+
+  button.classList.add("selected");
+}
+
+function reveal(question) {
+  const state = quizState[question];
+
+  if (!state) return;
+
+  if (!state.selected) {
+    alert("اختَر إجابتك أولًا قبل كشف التحليل.");
+    return;
+  }
+
+  if (state.revealed) return;
+
+  state.revealed = true;
+  completed++;
+
+  const isCorrect = state.selected === state.correct;
+
+  if (isCorrect) {
+    score++;
+  }
+
+  const number = question.slice(1);
+  const result = document.getElementById("result" + number);
+
+  result.classList.add("show");
+
+  const label = result.querySelector(".result-label");
+
+  if (!isCorrect) {
+    label.textContent = "الإجابة المختارة ليست الأدق — الإجابة الصحيحة: " + state.correct;
+    label.style.color = "var(--warning)";
+  }
+
+  updateScore();
+
+  result.scrollIntoView({
+    behavior: "smooth",
+    block: "nearest"
+  });
+}
+
+function updateScore() {
+  document.getElementById("score").textContent = score + " / 3";
+  document.getElementById("completed").textContent =
+    completed + " من 3 ملفات مكتملة";
+
+  document.getElementById("progressBar").style.width =
+    (completed / 3 * 100) + "%";
+}
+
+function resetQuiz() {
+  score = 0;
+  completed = 0;
+
+  Object.keys(quizState).forEach(question => {
+    quizState[question].selected = null;
+    quizState[question].revealed = false;
+
+    const number = question.slice(1);
+    const result = document.getElementById("result" + number);
+
+    result.classList.remove("show");
+
+    const label = result.querySelector(".result-label");
+    label.style.color = "var(--success)";
+
+    const options = document.querySelectorAll("#options" + number + " .option");
+
+    options.forEach(option => {
+      option.classList.remove("selected");
+    });
+  });
+
+  updateScore();
+  goTo("investigation");
+}
+</script>
+
+</body>
+</html>
